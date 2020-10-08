@@ -1,5 +1,5 @@
 
-public class HitBoxA extends Checl {
+public class HitBoxA extends Check {
 
     public HitBoxA(Data data) {
         super(data, CheckType.ACCESS, "HitBox (A)");
