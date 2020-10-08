@@ -1,0 +1,31 @@
+public class AutoBlockA extends Check {
+
+    boolean attacked;
+    int ticks;
+    
+    public AutoBlockA(Data data) {
+        super(data, CheckType.COMBAT, "AutoBlock (A)");
+    }
+    
+    @Override
+    public void handle(Event e) {
+        if (e instanceof UseEntity) {
+            this.attacked = true;
+        } else if (e instanceof BlockPlace) {
+            if (this.attacked) {
+                if (this.ticks < 2) {
+                    if (++this.preVL > 2) {
+                        flag(data, "low tick delay, t: " + this.ticks);
+                    }
+                } else {
+                    this.preVL = 0;
+                }
+                this.attacked = false;
+            }
+            this.ticks = 0;
+        }
+        else if (e instanceof PacketPlayInFlying) {
+            ++this.ticks;
+        }
+    }
+}
