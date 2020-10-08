@@ -11,21 +11,20 @@ public class AutoBlockA extends Check {
     public void handle(Event e) {
         if (e instanceof UseEntity) {
             this.attacked = true;
+        } else if (e instanceof PacketPlayInFlying) {
+            ++this.ticks;
         } else if (e instanceof BlockPlace) {
             if (this.attacked) {
-                if (this.ticks < 2) {
-                    if (++this.preVL > 2) {
+                if (this.ticks < 1) {
+                    if (++preVL > 1) {
                         flag(data, "low tick delay, t: " + this.ticks);
                     }
                 } else {
-                    this.preVL = 0;
+                    preVL = 0;
                 }
                 this.attacked = false;
             }
             this.ticks = 0;
-        }
-        else if (e instanceof PacketPlayInFlying) {
-            ++this.ticks;
         }
     }
 }
