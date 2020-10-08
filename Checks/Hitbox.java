@@ -2,7 +2,7 @@
 public class HitBoxA extends Checl {
 
     public HitBoxA(Data data) {
-        super(data, CheckType.ACCESS, "HitBox (A)"
+        super(data, CheckType.ACCESS, "HitBox (A)");
     }
     
     @Override
